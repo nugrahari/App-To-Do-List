@@ -27,7 +27,7 @@
 import Headers from "../Headers.vue"
 
 import { ref } from 'vue';
-const menuVisible = ref(false)
+const menuVisible = ref(true)
 const activeItem = ref('1')
 
 const toggleMenu = () => {

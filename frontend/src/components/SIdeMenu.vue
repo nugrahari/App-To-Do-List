@@ -1,8 +1,10 @@
 <template>
-    <div class="absolute top-[64px] left-0 bottom-0 w-[300px] bg-red-100 z-50 transition-all duration-300"
-        :class="menuVisible ? 'left-0' : '-left-[550px]'">
-
-        <li v-for="(val, i) in menu " :key="i" @click="onClickMenu(val.link)" class="pt-5 pl-10 list-none cursor-pointer" >
+    <div class="absolute top-[64px] left-0 bottom-0 w-[300px] bg-red-100 z-50 transition-all duration-300" :style="{
+        left: menuVisible ? '0' : '-550px',
+        transition: 'left 0.3s'
+    }">
+        <li v-for="(val, i) in menu " :key="i" @click="onClickMenu(val.link)"
+            class="pt-5 pl-10 list-none cursor-pointer">
             {{ val.nama }}
         </li>
 
