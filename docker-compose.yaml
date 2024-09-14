@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  django:
+    build: $PWD/backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - $PWD/backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "1"
+      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1"
+
+  vue:
+    build: $PWD/frontend # Adjust the path to your Vite.js project folder
+    volumes:
+      - $PWD/frontend:/app # Sync your local folder with the container
+      - /app/node_modules # Sync your local folder with the container
+    ports:
+      - "5173:5173"
+    command: npm run dev -- --host
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - django
