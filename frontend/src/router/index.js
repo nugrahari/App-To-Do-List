@@ -16,6 +16,16 @@ const routes = [
         name: "Project",
         component: () => import("../view/ProjectsPage/ProjectsPage.vue"),
       },
+      {
+        path: "/sprint",
+        name: "Sprint",
+        component: () => import("../view/ProjectsPage/SprintPage.vue"),
+      },
+      {
+        path: "/about",
+        name: "About",
+        component: () => import("../view/AboutPage/AboutPage.vue"),
+      },
     ],
   },
   {

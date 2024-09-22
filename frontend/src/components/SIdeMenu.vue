@@ -27,6 +27,11 @@ const menu = ref([
         "nama": "Projects",
         "link": "/projects",
         "icon": "projects"
+    },
+    {
+        "nama": "About",
+        "link": "/about",
+        "icon": "About"
     }
 ])
 

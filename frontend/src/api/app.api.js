@@ -4,6 +4,10 @@ export function getProject() {
     return authAxios.get("/v1/app-projects/api/projects/");
 }
 
+export function getProjectSprints(projectID) {
+    return authAxios.get(`/v1/app-projects/api/projects/${projectID}/sprints/`)
+}
+
 export function getSprintById(sprint_id) {
     return authAxios.get(`/v1/app-projects/api/sprints/${sprint_id}`);
 }
