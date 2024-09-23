@@ -7,8 +7,8 @@
             <el-table-column property="description" label="Description" width="120" />
         </el-table>
         <div style="margin-top: 20px">
-            <el-button @click="clearCurrent()">Clear selection</el-button>
             <div v-if="currentRow !== null" class="selectedProject">
+                <el-button @click="clearCurrent()">Clear selection</el-button>
                 <p class="m-2">Selected</p>
                 <p class="ml-2">nama: {{ currentRow?.name }} , description : {{ currentRow?.description }}</p>
                 <el-table :data="sprintList" highlight-current-row style="width: 100%" @row-click="handleRowClick">

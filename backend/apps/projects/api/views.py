@@ -4,11 +4,17 @@ from rest_framework.exceptions import NotFound
 from apps.tasks.api.serializers import models as task_models, TaskSerializer
 from .serializers import SprintSerializer
 from .. import models
-from .serializers import ProjectSerializer, SprintSerializer
+from .serializers import ProjectSerializer, SprintSerializer, UserProjectSerializer
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = models.Project.objects.all()
     serializer_class = ProjectSerializer
+
+
+class ProjectUserViewSet(viewsets.ModelViewSet):
+    queryset = models.ProjectUser.objects.all()
+    serializer_class = UserProjectSerializer
 
 
 class SprintViewSet(viewsets.ModelViewSet):
@@ -25,9 +31,21 @@ class SprintListByProjectView(generics.ListAPIView):
             raise NotFound("Project ID not provided")
 
         return models.Sprint.objects.filter(project_id=project_id)
-    
+
+
+class UserListByProjectView(generics.ListAPIView):
+    serializer_class = UserProjectSerializer
+
+    def get_queryset(self):
+        project_id = self.kwargs.get('project_id')
+        if not project_id:
+            raise NotFound("Project ID not provided")
+
+        return models.ProjectUser.objects.filter(project_id=project_id)
+
+
 class TaskListBySprintView(generics.ListAPIView):
-    serializer_class =  TaskSerializer
+    serializer_class = TaskSerializer
 
     def get_queryset(self):
         sprint_id = self.kwargs.get('sprint_id')

@@ -1,5 +1,7 @@
 from rest_framework import serializers
+from tools import serializers as global_serializer
 from .. import models
+
 
 class ProjectSerializer(serializers.ModelSerializer):
 
@@ -24,8 +26,8 @@ class SprintSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return models.Sprint.objects.create(**validated_data)
-    
-    def update(self, instance : models.Sprint, validated_data):
+
+    def update(self, instance: models.Sprint, validated_data):
         project = validated_data.pop('project', None)
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -33,3 +35,12 @@ class SprintSerializer(serializers.ModelSerializer):
             instance.project = project
         instance.save()
         return instance
+
+
+class UserProjectSerializer(serializers.ModelSerializer):
+    user = global_serializer.CustomUserSerializer()
+
+    class Meta:
+        model = models.ProjectUser
+        fields = '__all__'
+        read_only_fields = ['invited_at']
